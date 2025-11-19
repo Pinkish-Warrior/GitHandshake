@@ -1,0 +1,11 @@
+{
+  "name": "open-source-navigator",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "client": "npm run dev --workspace=client",
+    "server": "npm run start:dev --workspace=server"
+  }
+}
