@@ -28,7 +28,7 @@ With the backend foundation in place, work on the client-side application can be
         -   `LoginButton`: To initiate the GitHub authentication flow.
     3\.  **Authentication:** Implement the frontend logic to handle the GitHub login flow by communicating with the backend authentication endpoints.
 
-## 3. Database: Finalize Schema and Seeding
+## 3. Database: Finalize Schema and Seeding ✅
 
 - **Task:** Review and finalize the database schema.
 - **Details:**
