@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { IssuesService } from './issues.service';
 import { IssuesController } from './issues.controller';
-import { GithubModule } from '../github/github.module'; // Import GithubModule
+import { GithubModule } from '../github/github.module';
+import { Issue } from './entities/issue.entity';
 
 @Module({
-  imports: [GithubModule], // Add GithubModule to imports
+  imports: [GithubModule, TypeOrmModule.forFeature([Issue])],
   providers: [IssuesService],
   controllers: [IssuesController],
 })
