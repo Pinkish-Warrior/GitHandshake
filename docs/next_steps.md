@@ -14,7 +14,7 @@ The core backend service for fetching and storing beginner-friendly issues from 
   - The fetched issues should be stored in the PostgreSQL `issues` table. ✅
 - **Endpoint:** Create a new endpoint (e.g., `GET /issues`) to expose the aggregated issues to the frontend. ✅
 
-## 2. Frontend: Build the User Interface
+## 2. Frontend: Build the User Interface 🚧
 
 With the backend foundation in place, work on the client-side application can begin.
 
@@ -26,15 +26,16 @@ With the backend foundation in place, work on the client-side application can be
         -   `IssueList`: To display a list of `IssueCard` components.
         -   `LanguageFilter`: To allow users to filter issues by programming language.
         -   `LoginButton`: To initiate the GitHub authentication flow.
-    3\.  **Authentication:** Implement the frontend logic to handle the GitHub login flow by communicating with the backend authentication endpoints.
+    3\.  **API Integration:** Connect the frontend to the backend's `/issues` endpoint to fetch and display the aggregated issues.
+    4\.  **Authentication:** Implement the frontend logic to handle the GitHub login flow by communicating with the backend authentication endpoints.
 
 ## 3. Database: Finalize Schema and Seeding ✅
 
-- **Task:** Review and finalize the database schema.
+- **Task:** Review and finalize the database schema. ✅
 - **Details:**
 
-  - Consider if any additional fields are needed for the `issues` or `users` tables based on the data that will be fetched from the GitHub API.
-  - Create a seeding script to populate the database with initial sample data for development and testing purposes.
+  - Consider if any additional fields are needed for the `issues` or `users` tables based on the data that will be fetched from the GitHub API. ✅
+  - Create a seeding script to populate the database with initial sample data for development and testing purposes. ✅
 
 ---
 
