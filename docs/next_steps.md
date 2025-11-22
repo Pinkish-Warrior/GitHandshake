@@ -75,3 +75,20 @@ Here is a more detailed breakdown of the steps to implement the Issue Aggregatio
     - Consume `AuthContext` to get login status.
     - Conditionally render "Login with GitHub" or "Logout".
     - Handle logout action by calling `GET /api/auth/logout`.
+
+
+
+Here's the plan:
+1\. Restart the backend server with npm run server.
+2\. Log in again through [http://localhost:3000]
+    - this is okay
+
+3\. After redirect, check [http://localhost:3001/api/auth/status] in a new tab; you should see your user profile.
+    - {"status":"unauthenticated"}
+
+4\. Test logout by visiting [http://localhost:3001/api/auth/logout]
+
+    - seems to be logged out 
+5\. Finally, revisit [http://localhost:3001/api/auth/status]
+
+    - you should see {"status":"unauthenticated"}.
