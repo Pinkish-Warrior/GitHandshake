@@ -3,10 +3,8 @@ import React from 'react';
 
 const LoginButton = () => {
   const handleLogin = () => {
-    // In a real app, this would redirect to the backend auth endpoint
-    // For now, it just shows an alert.
-    alert('Logging in with GitHub...');
-    // window.location.href = '/api/auth/github';
+    // Redirect to the backend auth endpoint
+    window.location.href = 'http://localhost:3001/api/auth/github';
   };
 
   return (

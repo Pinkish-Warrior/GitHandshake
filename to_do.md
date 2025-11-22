@@ -29,14 +29,22 @@ Instructions:
 
 ---
 
-## Next Steps (as of 2025-11-21)
+## Today's Plan (2025-11-22)
 
 ### Frontend
 
-- **[In Progress] Implement Live Filtering:** Make the "Filter by Language" dropdown functional on the client-side.
-- **[In Progress] Enhance UI States:** Add a loading spinner and a better message for when no issues are found.
-- **[TODO] GitHub Authentication Flow:** Implement the frontend part of the GitHub login process.
+- **[Done] Complete Live Filtering:** Implemented client-side logic for "Filter by Language" dropdown, now leveraging backend API.
+- **[Done] Enhance UI States:** Added loading spinner and improved empty/error messages.
+- **[Done] Begin GitHub Authentication Flow (Frontend):** Implemented frontend redirection for the LoginButton.
+
+### Backend(actioned)
+
+- **[Done] Implement API Filtering:** Added filtering capabilities to the backend `/issues` endpoint (e.g., `/issues?language=javascript`).
+
+---
+
+## Next Steps
 
 ### Backend
 
-- **[TODO] API Filtering:** Add filtering capabilities to the backend `/issues` endpoint (e.g., `/issues?language=javascript`).
+- **[TODO] Implement full GitHub Authentication Flow:** Develop the backend logic for GitHub OAuth, including handling callbacks, exchanging codes for tokens, and session management.
