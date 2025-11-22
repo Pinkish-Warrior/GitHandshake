@@ -14,13 +14,12 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
     });
   }
 
-  async validate(accessToken: string, refreshToken: string, profile: any, done: any): Promise<any> {
+  async validate(accessToken: string, refreshToken: string, profile: any): Promise<any> {
     // In a real application, you would save the user to your database here.
-    // For this example, we'll just return the user profile.
-    const user = {
-        profile,
-        accessToken,
-    }
-    done(null, user);
+    // For this example, we'll just return the user's profile and accessToken.
+    return {
+      profile,
+      accessToken,
+    };
   }
 }

@@ -2,12 +2,30 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from '@nestjs/common';
+import * as session from 'express-session';
+import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix('api');
+
   const configService = app.get(ConfigService);
+
+  app.use(
+    session({
+      secret: configService.get<string>('SESSION_SECRET', 'a-very-secret-key'),
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 3600000, // 1 hour
+      },
+    }),
+  );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   const logger = new Logger('Bootstrap');
 
   const portsString = configService.get<string>('PORTS', '3001');
