@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { GithubModule } from './github/github.module';
 import { IssuesModule } from './issues/issues.module';
 import { Issue } from './issues/entities/issue.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Issue } from './issues/entities/issue.entity';
     }),
     GithubModule,
     IssuesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

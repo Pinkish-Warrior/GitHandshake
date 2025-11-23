@@ -20,6 +20,7 @@ async function bootstrap() {
     { owner: 'vercel', repo: 'next.js' },
     { owner: 'nestjs', repo: 'nest' },
     { owner: 'microsoft', repo: 'TypeScript' },
+    // {owner:'pinkish-warrior' , repo:'HaslettCLI'} # testing the app with my own repo
   ];
 
   for (const { owner, repo } of reposToSeed) {

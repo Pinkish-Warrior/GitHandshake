@@ -7,8 +7,8 @@ export class IssuesController {
   constructor(private readonly issuesService: IssuesService) {}
 
   @Get()
-  async findAll(): Promise<Issue[]> {
-    return this.issuesService.findAllIssues();
+  async findAll(@Query('language') language?: string): Promise<Issue[]> {
+    return this.issuesService.findAllIssues(language);
   }
 
   @Get('fetch-and-save/:owner/:repo')

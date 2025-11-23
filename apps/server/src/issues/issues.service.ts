@@ -43,7 +43,10 @@ export class IssuesService {
     return savedIssues;
   }
 
-  async findAllIssues(): Promise<Issue[]> {
+  async findAllIssues(language?: string): Promise<Issue[]> {
+    if (language) {
+      return this.issuesRepository.find({ where: { language } });
+    }
     return this.issuesRepository.find();
   }
 }

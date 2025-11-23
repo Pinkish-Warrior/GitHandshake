@@ -14,20 +14,20 @@ The core backend service for fetching and storing beginner-friendly issues from 
   - The fetched issues should be stored in the PostgreSQL `issues` table. ✅
 - **Endpoint:** Create a new endpoint (e.g., `GET /issues`) to expose the aggregated issues to the frontend. ✅
 
-## 2. Frontend: Build the User Interface 🚧
+## 2. Frontend: Build the User Interface ✅
 
 With the backend foundation in place, work on the client-side application can begin.
 
-- **Task:** Start building the React/Next.js frontend in the `client` application.
+- **Task:** Start building the React/Next.js frontend in the `client` application. ✅
 - **Immediate Steps:**
-    1\.  **UI/UX Wireframing:** Design simple wireframes for the main dashboard, focusing on displaying the list of issues and filtering options.
+    1\.  **UI/UX Wireframing:** Design simple wireframes for the main dashboard, focusing on displaying the list of issues and filtering options. 🚧 (Design task, not implemented by agent)
     2\.  **Core Components:** Develop the initial set of React components:
-        -   `IssueCard`: To display a single issue.
-        -   `IssueList`: To display a list of `IssueCard` components.
-        -   `LanguageFilter`: To allow users to filter issues by programming language.
-        -   `LoginButton`: To initiate the GitHub authentication flow.
-    3\.  **API Integration:** Connect the frontend to the backend's `/issues` endpoint to fetch and display the aggregated issues.
-    4\.  **Authentication:** Implement the frontend logic to handle the GitHub login flow by communicating with the backend authentication endpoints.
+        -   `IssueCard`: To display a single issue. ✅
+        -   `IssueList`: To display a list of `IssueCard` components. ✅
+        -   `LanguageFilter`: To allow users to filter issues by programming language. ✅
+        -   `LoginButton`: To initiate the GitHub authentication flow. ✅ (Frontend redirect working)
+    3\.  **API Integration:** Connect the frontend to the backend's `/api/issues` endpoint to fetch and display the aggregated issues. ✅
+    4\.  **Authentication:** Implement the frontend logic to handle the GitHub login flow by communicating with the backend authentication endpoints. 🚧 (Backend authentication flow skeleton implemented, frontend integration and session management pending)
 
 ## 3. Database: Finalize Schema and Seeding ✅
 
@@ -58,3 +58,37 @@ Here is a more detailed breakdown of the steps to implement the Issue Aggregatio
 4. **Implement the `GET /issues` Endpoint:** ✅
     - In the `IssuesController`, create the `GET /issues` endpoint. ✅
     - This endpoint will use the `IssuesService` to retrieve the list of aggregated issues from the database and return them as a JSON response. ✅
+
+---
+
+## Current Task: Implement Authentication Session Management 🚧
+
+- **Task:** Implement backend session management and frontend state handling for Login/Logout button.
+- **Details:**
+  - Install and configure `express-session` and `@nestjs/platform-express` for session management on the backend.
+  - Modify backend `AuthController` to establish a session upon successful GitHub login.
+  - Add backend API endpoints:
+    - `GET /api/auth/status`: To check current authentication status.
+    - `GET /api/auth/logout`: To destroy the user session and log out.
+  - Implement a React Context (`AuthContext`) on the frontend to manage and expose authentication state.
+    - Update `LoginButton` component to:
+    - Consume `AuthContext` to get login status.
+    - Conditionally render "Login with GitHub" or "Logout".
+    - Handle logout action by calling `GET /api/auth/logout`.
+
+
+
+Here's the plan:
+1\. Restart the backend server with npm run server.
+2\. Log in again through [http://localhost:3000]
+    - this is okay
+
+3\. After redirect, check [http://localhost:3001/api/auth/status] in a new tab; you should see your user profile.
+    - {"status":"unauthenticated"}
+
+4\. Test logout by visiting [http://localhost:3001/api/auth/logout]
+
+    - seems to be logged out 
+5\. Finally, revisit [http://localhost:3001/api/auth/status]
+
+    - you should see {"status":"unauthenticated"}.

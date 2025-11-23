@@ -6,21 +6,26 @@ import LoginButton from '../components/LoginButton';
 
 const Dashboard = () => {
   const [issues, setIssues] = useState([]);
-  const [filteredIssues, setFilteredIssues] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchIssues = async () => {
+      setLoading(true);
+      setError(null);
+      let url = 'http://localhost:3001/api/issues';
+      if (selectedLanguage) {
+        url += `?language=${selectedLanguage}`;
+      }
+
       try {
-        const response = await fetch('http://localhost:3001/issues');
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok. Is the server running?');
         }
         const data = await response.json();
         setIssues(data);
-        setFilteredIssues(data); // Initially, show all issues
       } catch (err) {
         setError(err.message);
       } finally {
@@ -29,17 +34,7 @@ const Dashboard = () => {
     };
 
     fetchIssues();
-  }, []);
-
-  useEffect(() => {
-    if (selectedLanguage) {
-      setFilteredIssues(
-        issues.filter(issue => issue.language === selectedLanguage)
-      );
-    } else {
-      setFilteredIssues(issues);
-    }
-  }, [selectedLanguage, issues]);
+  }, [selectedLanguage]);
 
   return (
     <div className="dashboard-container">
@@ -49,15 +44,18 @@ const Dashboard = () => {
       </header>
       <div className="dashboard-main">
         <aside className="filters-sidebar">
-          <LanguageFilter onSelectLanguage={setSelectedLanguage} />
+          <LanguageFilter 
+            selectedLanguage={selectedLanguage}
+            onSelectLanguage={setSelectedLanguage} 
+          />
         </aside>
         <main className="issues-content">
           {loading && <p>Loading issues...</p>}
           {error && <p>Error fetching issues: {error}</p>}
-          {!loading && !error && filteredIssues.length > 0 && (
-            <IssueList issues={filteredIssues} />
+          {!loading && !error && issues.length > 0 && (
+            <IssueList issues={issues} />
           )}
-          {!loading && !error && filteredIssues.length === 0 && (
+          {!loading && !error && issues.length === 0 && (
             <p>No issues found. Try selecting a different language or check if the database is seeded.</p>
           )}
         </main>
