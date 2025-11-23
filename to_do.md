@@ -45,6 +45,41 @@ Instructions:
 
 ## Next Steps
 
-### Backend
+### 1.0 Backend
 
-- **[TODO] Implement full GitHub Authentication Flow:** Develop the backend logic for GitHub OAuth, including handling callbacks, exchanging codes for tokens, and session management.
+- **[DONE] Implement full GitHub Authentication Flow:** Implemented session management, GitHub strategy, auth controller, and frontend integration for login/logout.
+- **[DONE] Generate comprehensive repository evaluation report (`report.md`).**
+- **[DONE] Conduct `npm audit` and document findings in `report.md`.**
+
+### 2.0 Frontend
+
+- **[DONE] Implement favicon and webmanifest metadata in client (`layout.jsx`).**
+- **[DONE] Create public directory for static assets (`apps/client/public`).**
+
+### Backend (Seed Data)
+
+- **[DONE] Update backend seed script (`src/seed.ts`) with popular repos for testing.**
+
+### Git Repository Management
+
+- **[DONE] Clean up merged remote feature branches.**
+- **[DONE] Delete local merged feature branch.**
+
+---
+
+## Tomorrow's Plan (2025-11-23)
+
+### Critical Fixes & Security
+
+- **[TODO] Address critical `next` package vulnerabilities:** Run `npm audit fix --force` in the project root.
+- **[TODO] Secure backend session secret:** Ensure `SESSION_SECRET` is configured in `.env.local` and remove hardcoded fallback in `apps/server/src/main.ts`.
+
+### Code Quality & Maintainability
+
+- **[TODO] Add ESLint configuration to `apps/server`:** Create a `.eslintrc.js` file to enable code quality checks.
+- **[TODO] Externalize backend URL in client:** Replace hardcoded `http://localhost:3001` with an environment variable (e.g., `NEXT_PUBLIC_API_URL`) in `apps/client/app/Dashboard.jsx` and `apps/client/components/LoginButton.jsx`.
+- **[TODO] Disable `synchronize: true` for production:** Modify `apps/server/src/app.module.ts` and plan for TypeORM migrations.
+
+### Feature Completion
+
+- **[TODO] Complete user persistence in authentication:** Save authenticated user data to the `users` table in the database (`apps/server/src/auth/github.strategy.ts`).
