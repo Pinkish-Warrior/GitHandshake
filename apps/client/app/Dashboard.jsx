@@ -14,7 +14,7 @@ const Dashboard = () => {
     const fetchIssues = async () => {
       setLoading(true);
       setError(null);
-      let url = 'http://localhost:3001/api/issues';
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/issues`;
       if (selectedLanguage) {
         url += `?language=${selectedLanguage}`;
       }

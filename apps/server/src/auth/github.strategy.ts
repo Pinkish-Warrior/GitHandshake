@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-github2';
 import { ConfigService } from '@nestjs/config';
+import { UsersService } from '../users/users.service'; // Import UsersService
 
 @Injectable()
 export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly usersService: UsersService, // Inject UsersService
+  ) {
     super({
       clientID: configService.get<string>('GITHUB_CLIENT_ID'),
       clientSecret: configService.get<string>('GITHUB_CLIENT_SECRET'),
@@ -14,12 +18,19 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
     });
   }
 
-  async validate(accessToken: string, refreshToken: string, profile: any): Promise<any> {
-    // In a real application, you would save the user to your database here.
-    // For this example, we'll just return the user's profile and accessToken.
-    return {
-      profile,
-      accessToken,
-    };
+  async validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: any,
+  ): Promise<any> {
+    const { id, username, photos } = profile;
+    const avatarUrl = photos && photos.length > 0 ? photos[0].value : null;
+
+    const user = await this.usersService.findOrCreate(
+      id,
+      username,
+      avatarUrl,
+    );
+    return user; // Return the user object from our database
   }
 }

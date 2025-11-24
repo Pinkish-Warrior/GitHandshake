@@ -1,12 +1,12 @@
 import React from 'react';
 
 const IssueCard = ({ issue }) => {
-  const { title, language, labels, url, description, stars, comments } = issue;
+  const { title, language, labels, issueUrl, description } = issue;
 
   return (
     <div className="issue-card">
       <h3>
-        <a href={url} target="_blank" rel="noopener noreferrer">
+        <a href={issueUrl} target="_blank" rel="noopener noreferrer">
           {title}
         </a>
       </h3>
@@ -17,10 +17,8 @@ const IssueCard = ({ issue }) => {
           {labels && labels.length > 0 && (
             <span>Labels: {labels.join(', ')}</span>
           )}
-          <span>Stars: {stars}</span>
-          <span>Comments: {comments}</span>
         </div>
-        <a href={url} target="_blank" rel="noopener noreferrer" className="view-issue-link">View Issue</a>
+        <a href={issueUrl} target="_blank" rel="noopener noreferrer" className="view-issue-link">View Issue</a>
       </div>
     </div>
   );
