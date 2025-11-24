@@ -1,20 +1,22 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Octokit } from '@octokit/rest';
-import { createAppAuth } from '@octokit/auth-app';
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Octokit } from "@octokit/rest";
+import { createAppAuth } from "@octokit/auth-app";
 
 @Injectable()
 export class GithubService {
   private auth: any;
 
   constructor(private readonly configService: ConfigService) {
-    const appId = this.configService.get<number>('GITHUB_APP_ID');
-    const privateKey = this.configService.get<string>('GITHUB_PRIVATE_KEY');
-    const clientId = this.configService.get<string>('GITHUB_CLIENT_ID');
-    const clientSecret = this.configService.get<string>('GITHUB_CLIENT_SECRET');
+    const appId = this.configService.get<number>("GITHUB_APP_ID");
+    const privateKey = this.configService.get<string>("GITHUB_PRIVATE_KEY");
+    const clientId = this.configService.get<string>("GITHUB_CLIENT_ID");
+    const clientSecret = this.configService.get<string>("GITHUB_CLIENT_SECRET");
 
     if (!appId || !privateKey || !clientId || !clientSecret) {
-      throw new InternalServerErrorException('Missing GitHub App configuration environment variables.');
+      throw new InternalServerErrorException(
+        "Missing GitHub App configuration environment variables.",
+      );
     }
 
     this.auth = createAppAuth({
@@ -26,11 +28,14 @@ export class GithubService {
   }
 
   getGithubAppId(): number {
-    return this.configService.get<number>('GITHUB_APP_ID');
+    return this.configService.get<number>("GITHUB_APP_ID");
   }
 
-  private async getInstallationOctokit(owner: string, repo: string): Promise<Octokit> {
-    const appAuthentication = await this.auth({ type: 'app' });
+  private async getInstallationOctokit(
+    owner: string,
+    repo: string,
+  ): Promise<Octokit> {
+    const appAuthentication = await this.auth({ type: "app" });
     const appOctokit = new Octokit({ auth: appAuthentication.token });
 
     const { data: installation } = await appOctokit.apps.getRepoInstallation({
@@ -39,7 +44,7 @@ export class GithubService {
     });
 
     const installationAuthentication = await this.auth({
-      type: 'installation',
+      type: "installation",
       installationId: installation.id,
     });
 
@@ -47,13 +52,14 @@ export class GithubService {
   }
 
   async findGoodFirstIssues(owner: string, repo: string): Promise<any[]> {
-    const octokit = await this.getInstallationOctokit(owner, repo);
+    const token = this.configService.get<string>("GITHUB_TOKEN");
+    const octokit = new Octokit({ auth: token });
 
     const { data: issues } = await octokit.rest.issues.listForRepo({
       owner,
       repo,
-      state: 'open',
-      labels: 'good first issue', // Filter by 'good first issue' label
+      state: "open",
+      labels: "good first issue", // Filter by 'good first issue' label
     });
 
     return issues;
