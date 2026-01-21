@@ -14,7 +14,7 @@
     "clean": "turbo run clean",
     "client": "pnpm --filter client dev",
     "server": "pnpm --filter server start:dev",
-    "db:connect": "docker exec -it githandshake-db-1 psql -U user -d open_source_navigator"
+    "db:connect": "docker exec -it githandshake-db-1 psql -U user -d open_source_$"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1"
