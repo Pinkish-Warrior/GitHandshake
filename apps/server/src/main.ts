@@ -15,6 +15,16 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
+  const githubPrivateKey = configService.get<string>("GITHUB_PRIVATE_KEY");
+  if (githubPrivateKey) {
+    console.log("--- START of GITHUB_PRIVATE_KEY ---");
+    console.log(githubPrivateKey);
+    console.log("--- END of GITHUB_PRIVATE_KEY ---");
+  } else {
+    console.log("GITHUB_PRIVATE_KEY not found or is empty.");
+  }
+
+
   app.use(
     session({
       secret: configService.getOrThrow<string>("SESSION_SECRET"),
