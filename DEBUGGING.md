@@ -53,3 +53,40 @@ After applying the fixes, the following steps will be used to run and test the a
     -   Verify that the dashboard loads and displays the seeded issues.
     -   Test the GitHub login functionality.
     -   Confirm that filtering by language works as expected.
+
+---
+
+## 4-Hour Execution Plan
+
+**Date**: January 19, 2026
+**Status**: Ready to Execute
+
+### Phase 1: Critical Server Configuration (30 minutes)
+
+1. **Fix module system mismatch** - Remove `"type": "module"` from `apps/server/package.json`
+2. **Fix environment variables** - Rename `GITHANDSHAKE_SEEDER_TOKEN` to `GITHUB_TOKEN` in `.env.local`
+3. **Generate secure session secret** - Replace placeholder `SESSION_SECRET` with cryptographically strong value
+4. **Re-enable GithubModule** - Uncomment the disabled module in `apps/server/src/app.module.ts`
+
+### Phase 2: Verification & Testing (30 minutes)
+
+5. **Start development services** - Launch database and servers using `./start-dev.sh`
+6. **Seed the database** - Populate with GitHub issues using `npm run seed --workspace=server`
+7. **Test application** - Verify dashboard loads, GitHub login works, and filtering functionality operates correctly
+
+### Time Allocation
+
+- Configuration fixes: ~30 minutes
+- Service startup and seeding: ~15 minutes
+- Testing and verification: ~15 minutes
+- Buffer for unexpected issues: ~2 hours
+
+### Progress Tracking
+
+- [ ] Fix module system mismatch
+- [ ] Rename seeder token variable
+- [ ] Generate secure session secret
+- [ ] Re-enable GithubModule
+- [ ] Start development services
+- [ ] Seed database
+- [ ] Test application functionality

@@ -17,4 +17,4 @@ dist/
 # Gemini related files (generated/helper scripts)
 check-model.js
 debug-models.js
-gemini-test.js
+gemini-test.js.env git add .ignore

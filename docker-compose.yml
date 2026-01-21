@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   db:
@@ -31,11 +31,11 @@ services:
       - '3001:3001'
     volumes:
       # Mount source code for development (optional, but good for debugging)
-      - ./apps/server/src:/usr/src/app/apps/server/src
-      - ./apps/server/tsconfig.json:/usr/src/app/apps/server/tsconfig.json
-      - ./apps/server/nest-cli.json:/usr/src/app/apps/server/nest-cli.json
-      - ./package.json:/usr/src/app/package.json
-      - ./apps/server/package.json:/usr/src/app/apps/server/package.json
+      # - ./apps/server/src:/usr/src/app/apps/server/src
+      # - ./apps/server/tsconfig.json:/usr/src/app/apps/server/tsconfig.json
+      # - ./apps/server/nest-cli.json:/usr/src/app/apps/server/nest-cli.json
+      # - ./package.json:/usr/src/app/package.json
+      # - ./apps/server/package.json:/usr/src/app/apps/server/package.json
       - /usr/src/app/node_modules # Keep node_modules inside the container
     depends_on:
       db:
@@ -54,16 +54,16 @@ services:
       - '3000:3000'
     volumes:
       # Mount source code for development (optional, but good for debugging)
-      - ./apps/client/app:/usr/src/app/apps/client/app
-      - ./apps/client/components:/usr/src/app/apps/client/components
-      - ./apps/client/public:/usr/src/app/apps/client/public
-      - ./apps/client/package.json:/usr/src/app/apps/client/package.json
-      - ./package.json:/usr/src/app/package.json
+      # - ./apps/client/app:/usr/src/app/apps/client/app
+      # - ./apps/client/components:/usr/src/app/apps/client/components
+      # - ./apps/client/public:/usr/src/app/apps/client/public
+      # - ./apps/client/package.json:/usr/src/app/apps/client/package.json
+      # - ./package.json:/usr/src/app/package.json
       - /usr/src/app/node_modules # Keep node_modules inside the container
     depends_on:
       - server
     # Use dev for hot-reloading during development
-    command: npm run dev --workspace=client
+    command: npm run start --workspace=client
 
 volumes:
   db_data:
