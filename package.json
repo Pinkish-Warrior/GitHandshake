@@ -1,16 +1,25 @@
 {
   "name": "open-source-navigator",
-  "type": "module",
   "private": true,
+  "packageManager": "pnpm@9.1.0",
   "workspaces": [
     "apps/*"
   ],
   "scripts": {
-    "client": "npm run dev --workspace=client",
-    "server": "npm run start:dev --workspace=server",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "client": "pnpm --filter client dev",
+    "server": "pnpm --filter server start:dev",
     "db:connect": "docker exec -it githandshake-db-1 psql -U user -d open_source_navigator"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1"
+  },
+  "devDependencies": {
+    "turbo": "^2.7.5"
   }
 }
