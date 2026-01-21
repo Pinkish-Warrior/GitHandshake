@@ -13,7 +13,7 @@ export class GithubService {
     const clientId = this.configService.get<string>("GITHUB_CLIENT_ID");
     const clientSecret = this.configService.get<string>("GITHUB_CLIENT_SECRET");
 
-    if (!appId || !privateKey || !clientId || !clientSecret) {
+    if ((!appId || !privateKey || !clientId || !clientSecret) && this.configService.get<string>("NODE_ENV") === 'production') {
       throw new InternalServerErrorException(
         "Missing GitHub App configuration environment variables.",
       );
@@ -59,7 +59,7 @@ export class GithubService {
       owner,
       repo,
       state: "open",
-      labels: "good first issue", // Filter by 'good first issue' label
+      labels: "dummy issue", // Filter by 'good first issue' label
     });
 
     return issues;
