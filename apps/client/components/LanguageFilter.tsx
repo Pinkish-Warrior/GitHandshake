@@ -2,10 +2,15 @@
 
 import React from 'react';
 
-const LanguageFilter = ({ selectedLanguage, onSelectLanguage }) => {
-  const languages = ['', 'JavaScript', 'Python', 'Java', 'TypeScript', 'C++', 'Ruby', 'Go']; // Example languages
+interface LanguageFilterProps {
+  selectedLanguage: string;
+  onSelectLanguage: (language: string) => void;
+}
 
-  const handleChange = (event) => {
+const LanguageFilter = ({ selectedLanguage, onSelectLanguage }: LanguageFilterProps) => {
+  const languages = ['', 'JavaScript', 'Python', 'Java', 'TypeScript', 'C++', 'Ruby', 'Go'];
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onSelectLanguage(event.target.value);
   };
 

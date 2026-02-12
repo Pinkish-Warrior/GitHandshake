@@ -1,7 +1,12 @@
 import React from 'react';
+import { Issue } from '../types';
 
-const IssueCard = ({ issue }) => {
-  const { title, language, labels, issueUrl, description } = issue;
+interface IssueCardProps {
+  issue: Issue;
+}
+
+const IssueCard = ({ issue }: IssueCardProps) => {
+  const { title, language, labels, issueUrl } = issue;
 
   return (
     <div className="issue-card">
@@ -10,9 +15,8 @@ const IssueCard = ({ issue }) => {
           {title}
         </a>
       </h3>
-      <p>{description}</p>
       <div className="issue-meta">
-        <div className="issue-details-left"> {/* New wrapper for left-aligned details */}
+        <div className="issue-details-left">
           <span>Language: {language}</span>
           {labels && labels.length > 0 && (
             <span>Labels: {labels.join(', ')}</span>

@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import IssueList from '../components/IssueList';
 import LanguageFilter from '../components/LanguageFilter';
 import LoginButton from '../components/LoginButton';
+import { Issue } from '../types';
 
 const Dashboard = () => {
-  const [issues, setIssues] = useState([]);
+  const [issues, setIssues] = useState<Issue[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -27,7 +28,7 @@ const Dashboard = () => {
         const data = await response.json();
         setIssues(data);
       } catch (err) {
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
         setLoading(false);
       }
@@ -44,9 +45,9 @@ const Dashboard = () => {
       </header>
       <div className="dashboard-main">
         <aside className="filters-sidebar">
-          <LanguageFilter 
+          <LanguageFilter
             selectedLanguage={selectedLanguage}
-            onSelectLanguage={setSelectedLanguage} 
+            onSelectLanguage={setSelectedLanguage}
           />
         </aside>
         <main className="issues-content">
