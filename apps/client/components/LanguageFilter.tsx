@@ -8,7 +8,7 @@ interface LanguageFilterProps {
 }
 
 const LanguageFilter = ({ selectedLanguage, onSelectLanguage }: LanguageFilterProps) => {
-  const languages = ['', 'JavaScript', 'Python', 'Java', 'TypeScript', 'C++', 'Ruby', 'Go'];
+  const languages = ['', 'JavaScript', 'Python', 'Java', 'TypeScript', 'C++', 'Ruby', 'Go', 'Rust'];
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onSelectLanguage(event.target.value);

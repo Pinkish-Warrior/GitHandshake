@@ -14,13 +14,29 @@ async function bootstrap() {
 
   // You can define a list of repositories to seed here
   const reposToSeed = [
+    // JavaScript / TypeScript
     { owner: "facebook", repo: "react" },
     { owner: "angular", repo: "angular" },
     { owner: "vuejs", repo: "vue" },
     { owner: "vercel", repo: "next.js" },
     { owner: "nestjs", repo: "nest" },
     { owner: "microsoft", repo: "TypeScript" },
-    // {owner:'pinkish-warrior' , repo:'HaslettCLI'} # testing the app with my own repo
+    // Python
+    { owner: "django", repo: "django" },
+    { owner: "pallets", repo: "flask" },
+    { owner: "fastapi", repo: "fastapi" },
+    // Go
+    { owner: "golang", repo: "go" },
+    { owner: "kubernetes", repo: "kubernetes" },
+    // Rust
+    { owner: "rust-lang", repo: "rust" },
+    // Java
+    { owner: "spring-projects", repo: "spring-boot" },
+    { owner: "elastic", repo: "elasticsearch" },
+    // Ruby
+    { owner: "rails", repo: "rails" },
+    // C++
+    { owner: "godotengine", repo: "godot" },
   ];
 
   for (const { owner, repo } of reposToSeed) {
