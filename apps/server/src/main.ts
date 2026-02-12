@@ -4,26 +4,18 @@ import { ConfigService } from "@nestjs/config";
 import { Logger } from "@nestjs/common";
 import * as session from "express-session";
 import * as passport from "passport";
+import helmet from "helmet";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
+  app.use(helmet());
   app.enableCors({
-    origin: "http://localhost:3000",
+    origin: configService.get<string>("CLIENT_URL", "http://localhost:3000"),
     credentials: true,
   });
   app.setGlobalPrefix("api");
-
-  const configService = app.get(ConfigService);
-
-  const githubPrivateKey = configService.get<string>("GITHUB_PRIVATE_KEY");
-  if (githubPrivateKey) {
-    console.log("--- START of GITHUB_PRIVATE_KEY ---");
-    console.log(githubPrivateKey);
-    console.log("--- END of GITHUB_PRIVATE_KEY ---");
-  } else {
-    console.log("GITHUB_PRIVATE_KEY not found or is empty.");
-  }
-
 
   app.use(
     session({
@@ -33,8 +25,8 @@ async function bootstrap() {
       cookie: {
         maxAge: 3600000, // 1 hour
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Automatically true in production with HTTPS
-        sameSite: 'lax', // Required for OAuth redirects
+        secure: process.env.NODE_ENV === "production", // Automatically true in production with HTTPS
+        sameSite: "lax", // Required for OAuth redirects
       },
     }),
   );
