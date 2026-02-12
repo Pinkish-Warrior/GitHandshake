@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { User } from "./entities/user.entity";
 
 @Injectable()
 export class UsersService {
@@ -10,7 +10,11 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findOrCreate(githubId: number, githubUsername: string, avatarUrl: string): Promise<User> {
+  async findOrCreate(
+    githubId: number,
+    githubUsername: string,
+    avatarUrl: string,
+  ): Promise<User> {
     let user = await this.usersRepository.findOne({ where: { id: githubId } });
 
     if (!user) {
@@ -25,7 +29,7 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  async findOne(githubId: number): Promise<User | undefined> {
+  async findOne(githubId: number): Promise<User | null> {
     return this.usersRepository.findOne({ where: { id: githubId } });
   }
 }
