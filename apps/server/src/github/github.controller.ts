@@ -6,7 +6,7 @@ export class GithubController {
   constructor(private readonly githubService: GithubService) {}
 
   @Get("app-id")
-  getGithubAppId(): number {
+  getGithubAppId(): number | undefined {
     return this.githubService.getGithubAppId();
   }
 }

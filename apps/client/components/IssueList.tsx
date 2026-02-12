@@ -1,7 +1,12 @@
 import React from 'react';
 import IssueCard from './IssueCard';
+import { Issue } from '../types';
 
-const IssueList = ({ issues }) => {
+interface IssueListProps {
+  issues: Issue[];
+}
+
+const IssueList = ({ issues }: IssueListProps) => {
   return (
     <div className="issue-list">
       {issues.map(issue => (

@@ -13,10 +13,13 @@ export class GithubService {
     const clientId = this.configService.get<string>("GITHUB_CLIENT_ID");
     const clientSecret = this.configService.get<string>("GITHUB_CLIENT_SECRET");
 
-    if ((!appId || !privateKey || !clientId || !clientSecret) && this.configService.get<string>("NODE_ENV") === 'production') {
-      throw new InternalServerErrorException(
-        "Missing GitHub App configuration environment variables.",
-      );
+    if (!appId || !privateKey || !clientId || !clientSecret) {
+      if (this.configService.get<string>("NODE_ENV") === "production") {
+        throw new InternalServerErrorException(
+          "Missing GitHub App configuration environment variables.",
+        );
+      }
+      return;
     }
 
     this.auth = createAppAuth({
@@ -27,7 +30,7 @@ export class GithubService {
     });
   }
 
-  getGithubAppId(): number {
+  getGithubAppId(): number | undefined {
     return this.configService.get<number>("GITHUB_APP_ID");
   }
 
@@ -51,6 +54,14 @@ export class GithubService {
     return new Octokit({ auth: installationAuthentication.token });
   }
 
+  async getRepoLanguage(owner: string, repo: string): Promise<string | null> {
+    const token = this.configService.get<string>("GITHUB_TOKEN");
+    const octokit = new Octokit({ auth: token });
+
+    const { data } = await octokit.rest.repos.get({ owner, repo });
+    return data.language || null;
+  }
+
   async findGoodFirstIssues(owner: string, repo: string): Promise<any[]> {
     const token = this.configService.get<string>("GITHUB_TOKEN");
     const octokit = new Octokit({ auth: token });
@@ -59,7 +70,7 @@ export class GithubService {
       owner,
       repo,
       state: "open",
-      labels: "dummy issue", // Filter by 'good first issue' label
+      labels: "good first issue",
     });
 
     return issues;

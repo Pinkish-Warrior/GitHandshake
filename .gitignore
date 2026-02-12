@@ -13,6 +13,7 @@ dist/
 # Secrets
 *.pem
 *.env*
+!.env.sample
 
 # Gemini related files (generated/helper scripts)
 check-model.js

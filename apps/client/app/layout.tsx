@@ -1,6 +1,7 @@
 import './globals.css';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'GitHandShake - GitHub Issue Finder',
   description: 'Find and contribute to open-source projects',
   icons: {
@@ -13,8 +14,7 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
