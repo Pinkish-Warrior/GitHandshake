@@ -9,9 +9,6 @@ export class Issue {
   githubIssueId: number;
 
   @Column({ length: 255 })
-  repoOwner: string;
-
-  @Column({ length: 255 })
   repoName: string;
 
   @Column({ type: "text" })
@@ -20,10 +17,10 @@ export class Issue {
   @Column({ type: "text" })
   title: string;
 
-  @Column({ length: 100, nullable: true })
+  @Column({ type: "varchar", length: 100, nullable: true })
   language: string | null;
 
-  @Column({ type: "text", array: true, nullable: true })
+  @Column({ type: "text", array: true, nullable: true, default: [] })
   labels: string[] | null;
 
   @Column({ type: "timestamptz", nullable: true })

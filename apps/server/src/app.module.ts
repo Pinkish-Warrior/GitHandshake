@@ -13,7 +13,7 @@ import { TypeOrmConfigService } from "./config/typeorm.config"; // Assuming this
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ".env",
+      envFilePath: "../../.env",
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
