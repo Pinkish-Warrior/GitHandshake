@@ -16,18 +16,17 @@ export class IssuesService {
     owner: string,
     repo: string,
   ): Promise<Issue[]> {
-    const githubIssues = await this.githubService.findGoodFirstIssues(
-      owner,
-      repo,
-    );
+    const [githubIssues, repoLanguage] = await Promise.all([
+      this.githubService.findGoodFirstIssues(owner, repo),
+      this.githubService.getRepoLanguage(owner, repo),
+    ]);
     const issuesToSave = githubIssues.map((issue) => ({
       githubIssueId: issue.id,
       repoName: repo,
       issueUrl: issue.html_url,
       title: issue.title,
-      language:
-        issue.labels.find((label) => label.color === "ededed")?.name || null, // Assuming language might be a label with a specific color
-      labels: issue.labels.map((label) => label.name),
+      language: repoLanguage,
+      labels: issue.labels.map((label: { name: string }) => label.name),
       createdAtGithub: new Date(issue.created_at),
       updatedAtGithub: new Date(issue.updated_at),
       fetchedAt: new Date(),
