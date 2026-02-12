@@ -15,9 +15,9 @@ const Dashboard = () => {
     const fetchIssues = async () => {
       setLoading(true);
       setError(null);
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/issues`;
+      let url = `/api/issues`;
       if (selectedLanguage) {
-        url += `?language=${selectedLanguage}`;
+        url += `?language=${encodeURIComponent(selectedLanguage)}`;
       }
 
       try {
