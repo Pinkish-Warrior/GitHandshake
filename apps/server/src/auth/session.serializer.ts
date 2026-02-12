@@ -8,21 +8,19 @@ export class SessionSerializer extends PassportSerializer {
     super();
   }
 
-  serializeUser(user: any, done: (err: Error, user: any) => void): any {
-    // Store only the user ID (as string to handle BigInt)
+  serializeUser(user: any, done: (err: Error | null, user: any) => void): void {
     done(null, user.id.toString());
   }
 
   async deserializeUser(
     userId: string,
-    done: (err: Error, payload: any) => void,
-  ): Promise<any> {
+    done: (err: Error | null, payload: any) => void,
+  ): Promise<void> {
     try {
-      // Fetch the user from database using the ID
       const user = await this.usersService.findOne(parseInt(userId, 10));
       done(null, user);
     } catch (error) {
-      done(error, null);
+      done(error as Error, null);
     }
   }
 }
