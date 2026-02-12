@@ -16,9 +16,6 @@
     "server": "pnpm --filter server start:dev",
     "db:connect": "docker exec -it githandshake-db-1 psql -U user -d open_source_$"
   },
-  "dependencies": {
-    "@google/generative-ai": "^0.24.1"
-  },
   "devDependencies": {
     "turbo": "^2.7.5"
   }
