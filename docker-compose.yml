@@ -41,7 +41,7 @@ services:
       db:
         condition: service_healthy
     # Use start:dev for hot-reloading during development
-    command: npm run start:dev --workspace=server
+    command: pnpm --filter server start:dev
 
   client:
     build:
@@ -63,7 +63,7 @@ services:
     depends_on:
       - server
     # Use dev for hot-reloading during development
-    command: npm run start --workspace=client
+    command: pnpm --filter client dev
 
 volumes:
   db_data:
