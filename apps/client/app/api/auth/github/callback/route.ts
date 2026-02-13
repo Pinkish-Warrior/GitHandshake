@@ -10,14 +10,11 @@ export async function GET(req: NextRequest) {
     headers: {
       cookie: req.headers.get("cookie") || "",
     },
-    redirect: "manual",
   });
 
-  const response = NextResponse.redirect(
-    new URL("/", req.url),
-  );
+  const response = NextResponse.redirect(new URL("/", req.url));
 
-  // Forward the Set-Cookie header from the backend
+  // Forward the Set-Cookie header from the backend (now a 200 JSON response)
   const setCookie = res.headers.getSetCookie();
   for (const cookie of setCookie) {
     response.headers.append("set-cookie", cookie);
