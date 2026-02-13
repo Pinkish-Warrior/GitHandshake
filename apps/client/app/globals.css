@@ -1,8 +1,34 @@
+/* ── Theme Variables ── */
+
+:root {
+  --bg-body: #f0eef5;
+  --bg-main: #e8e4f0;
+  --bg-card: #ffffff;
+  --bg-filter: #eeebf5;
+  --text-primary: #24292e;
+  --text-secondary: #586069;
+  --text-heading: #4a2fa0;
+  --text-meta: #4a3d6b;
+  --text-label: #2d1b69;
+}
+
+[data-theme="dark"] {
+  --bg-body: #1a1025;
+  --bg-main: #231535;
+  --bg-card: #2d1b4a;
+  --bg-filter: #2d1b4a;
+  --text-primary: #e0dce8;
+  --text-secondary: #b8b0c8;
+  --text-heading: #b89eff;
+  --text-meta: #b0a2d1;
+  --text-label: #c4b8e0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
-  background-color: #f0eef5;
-  color: #24292e;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
 }
 
 /* ── Layout ── */
@@ -45,6 +71,12 @@ body {
   width: 100%;
   height: 100%;
   flex: 1;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .dashboard-hero h1 {
@@ -123,13 +155,12 @@ body {
 .dashboard-main {
   display: flex;
   flex: 1;
-  background-color: #e8e4f0;
+  background-color: var(--bg-main);
 }
 
 .filters-sidebar {
   width: 260px;
   padding: 24px;
-  background-color: #e8e4f0;
   border-right: none;
   position: sticky;
   top: 0;
@@ -150,33 +181,98 @@ body {
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 1rem;
-  color: #2d1b69;
+  color: var(--text-label);
 }
 
-.language-filter select {
+.language-filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.language-filter-item {
   width: 100%;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #b0a2d1;
-  background-color: #eeebf5;
-  color: #2d1b69;
-  font-size: 0.9rem;
-}
-
-.language-selected {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 12px;
   padding: 8px 12px;
-  background-color: #b0a2d1;
   border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--text-label);
   font-size: 0.9rem;
   font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
 }
 
-.language-selected i {
-  font-size: 1.4rem;
+.language-filter-item:hover {
+  background-color: var(--bg-filter);
+}
+
+.language-filter-item.active {
+  background-color: var(--bg-filter);
+  border-color: #b0a2d1;
+  font-weight: 600;
+}
+
+.language-filter-item .language-badge {
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* Language-specific filter badge colors */
+.language-filter-item[data-language="javascript"] .language-badge {
+  color: #735c0f;
+}
+.language-filter-item[data-language="python"] .language-badge {
+  color: #1a4971;
+}
+.language-filter-item[data-language="typescript"] .language-badge {
+  color: #1b4a57;
+}
+.language-filter-item[data-language="go"] .language-badge {
+  color: #006d88;
+}
+.language-filter-item[data-language="java"] .language-badge {
+  color: #6d4710;
+}
+.language-filter-item[data-language="c++"] .language-badge {
+  color: #9e1a42;
+}
+.language-filter-item[data-language="ruby"] .language-badge {
+  color: #701516;
+}
+.language-filter-item[data-language="rust"] .language-badge {
+  color: #8a5a36;
+}
+
+/* Dark mode filter badge colors */
+[data-theme="dark"] .language-filter-item[data-language="javascript"] .language-badge {
+  color: #fff4a8;
+}
+[data-theme="dark"] .language-filter-item[data-language="python"] .language-badge {
+  color: #90c8f0;
+}
+[data-theme="dark"] .language-filter-item[data-language="typescript"] .language-badge {
+  color: #85e0f0;
+}
+[data-theme="dark"] .language-filter-item[data-language="go"] .language-badge {
+  color: #70e0f8;
+}
+[data-theme="dark"] .language-filter-item[data-language="java"] .language-badge {
+  color: #f0b852;
+}
+[data-theme="dark"] .language-filter-item[data-language="c++"] .language-badge {
+  color: #ffa0c0;
+}
+[data-theme="dark"] .language-filter-item[data-language="ruby"] .language-badge {
+  color: #f07070;
+}
+[data-theme="dark"] .language-filter-item[data-language="rust"] .language-badge {
+  color: #f0d8c0;
 }
 
 /* ── Issue Grid ── */
@@ -190,7 +286,7 @@ body {
 /* ── Issue Card (base) ── */
 
 .issue-card {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border: 1px solid #c4b8e0;
   border-left: 4px solid #d1d5da;
   border-radius: 6px;
@@ -215,7 +311,7 @@ body {
 }
 
 .issue-card h3 a {
-  color: #4a2fa0;
+  color: var(--text-heading);
   text-decoration: none;
   font-weight: 600;
 }
@@ -226,7 +322,7 @@ body {
 
 .issue-card p {
   flex-grow: 1;
-  color: #586069;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 12px;
@@ -236,7 +332,7 @@ body {
 
 .issue-meta {
   font-size: 0.8rem;
-  color: #4a3d6b;
+  color: var(--text-meta);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -255,13 +351,13 @@ body {
 }
 
 .issue-meta span {
-  background-color: #eeebf5;
+  background-color: var(--bg-filter);
   padding: 2px 6px;
   border-radius: 4px;
 }
 
 .issue-card .view-issue-link {
-  color: #4a2fa0;
+  color: var(--text-heading);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
@@ -359,6 +455,66 @@ body {
 .issue-card[data-language="rust"] .language-badge {
   background-color: rgba(222, 165, 132, 0.2);
   color: #8a5a36;
+}
+
+/* ── Sidebar Footer ── */
+
+.sidebar-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 308px;
+  padding: 16px 24px;
+  background-color: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-meta);
+}
+
+.sidebar-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #e85d26;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sidebar-footer a:hover {
+  text-decoration: underline;
+}
+
+.sidebar-footer a i {
+  font-size: 0.9rem;
+}
+
+/* ── Dark Mode: Language Badge Text ── */
+
+[data-theme="dark"] .issue-card[data-language="javascript"] .language-badge {
+  color: #fff4a8;
+}
+[data-theme="dark"] .issue-card[data-language="python"] .language-badge {
+  color: #90c8f0;
+}
+[data-theme="dark"] .issue-card[data-language="typescript"] .language-badge {
+  color: #85e0f0;
+}
+[data-theme="dark"] .issue-card[data-language="go"] .language-badge {
+  color: #70e0f8;
+}
+[data-theme="dark"] .issue-card[data-language="java"] .language-badge {
+  color: #f0b852;
+}
+[data-theme="dark"] .issue-card[data-language="c++"] .language-badge {
+  color: #ffa0c0;
+}
+[data-theme="dark"] .issue-card[data-language="ruby"] .language-badge {
+  color: #f07070;
+}
+[data-theme="dark"] .issue-card[data-language="rust"] .language-badge {
+  color: #f0d8c0;
 }
 
 /* ── Mobile Responsive ── */
