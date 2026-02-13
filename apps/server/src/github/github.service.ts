@@ -67,13 +67,26 @@ export class GithubService {
     const token = this.configService.get<string>("GITHUB_TOKEN");
     const octokit = new Octokit({ auth: token });
 
-    const { data: issues } = await octokit.rest.issues.listForRepo({
-      owner,
-      repo,
-      state: "open",
-      labels: "good first issue",
-    });
+    const labels = ["good first issue", "help wanted", "easy close"];
+    const seen = new Set<number>();
+    const allIssues: any[] = [];
 
-    return issues;
+    for (const label of labels) {
+      const { data: issues } = await octokit.rest.issues.listForRepo({
+        owner,
+        repo,
+        state: "open",
+        labels: label,
+      });
+
+      for (const issue of issues) {
+        if (!seen.has(issue.id)) {
+          seen.add(issue.id);
+          allIssues.push(issue);
+        }
+      }
+    }
+
+    return allIssues;
   }
 }
