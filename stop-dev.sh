@@ -3,16 +3,19 @@
 # A script to stop the development environment for GitHandshake.
 
 echo "--- Stopping backend and frontend servers... ---"
-# Use pkill to find and kill the processes by name, which is robust.
-pkill -f "next dev"
-pkill -f "nest start --watch"
+pkill -f "pnpm --filter server" 2>/dev/null
+pkill -f "pnpm --filter client" 2>/dev/null
+pkill -f "next dev" 2>/dev/null
+pkill -f "nest start" 2>/dev/null
 echo "Servers stopped."
 
-echo "\n--- Stopping database container... ---"
-podman compose down
+echo ""
+echo "--- Stopping database container... ---"
+podman-compose down
 
 # Clean up log files
 rm -f server.log client.log
 
-echo "\n--- Development environment stopped. ---"
+echo ""
+echo "--- Development environment stopped. ---"
 echo "If you are done with development, you can also stop the Podman machine with: podman machine stop"
