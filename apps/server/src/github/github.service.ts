@@ -9,7 +9,8 @@ export class GithubService {
 
   constructor(private readonly configService: ConfigService) {
     const appId = this.configService.get<number>("GITHUB_APP_ID");
-    const privateKey = this.configService.get<string>("GITHUB_PRIVATE_KEY");
+    const privateKeyRaw = this.configService.get<string>("GITHUB_PRIVATE_KEY");
+    const privateKey = privateKeyRaw?.replace(/\\n/g, "\n");
     const clientId = this.configService.get<string>("GITHUB_CLIENT_ID");
     const clientSecret = this.configService.get<string>("GITHUB_CLIENT_SECRET");
 
