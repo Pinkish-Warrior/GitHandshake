@@ -39,9 +39,12 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>GitHub Issues Dashboard</h1>
-        <LoginButton />
+      <header className="dashboard-hero">
+        <div className="hero-overlay">
+          <h1>GitHandshake</h1>
+          <LoginButton />
+          <p className="hero-subtitle">Discover good first issues across open source</p>
+        </div>
       </header>
       <div className="dashboard-main">
         <aside className="filters-sidebar">

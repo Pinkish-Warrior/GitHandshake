@@ -18,62 +18,88 @@ body {
 .dashboard-hero {
   position: relative;
   min-height: 280px;
-  background: linear-gradient(135deg, #1a0533 0%, #2d1b69 45%, #4D2FB2 100%);
-  background-attachment: fixed;
+  background-color: #1a0533;
+  background-image: linear-gradient(135deg, rgba(26, 5, 51, 0.35) 0%, rgba(45, 27, 105, 0.25) 45%, rgba(77, 47, 178, 0.2) 100%),
+    url("/gitconnect.png");
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
-  padding: 48px 24px;
+  padding: 24px 24px 16px;
 }
 
 .hero-overlay {
   position: relative;
   z-index: 1;
-  color: #ffffff;
+  color: #1a0533;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  flex: 1;
 }
 
 .dashboard-hero h1 {
-  margin: 0 0 8px 0;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #ffffff;
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #e85d26;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  letter-spacing: -0.5px;
+  font-family: "Nunito", "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .hero-subtitle {
-  margin: 0 0 24px 0;
+  margin: 0;
   font-size: 1.1rem;
-  color: #8b949e;
-  font-weight: 400;
+  color: #e85d26;
+  font-weight: 600;
 }
 
 /* Login button variant inside hero */
 .dashboard-hero .login-button {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: #e85d26;
+  border: 1px solid #e85d26;
   color: #ffffff;
 }
 
 .dashboard-hero .login-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #cc4a1a;
 }
 
 .dashboard-hero .user-info span {
-  color: #ffffff;
+  color: #e85d26;
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 /* ── Buttons ── */
 
 .login-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background-color: #24292e;
   color: white;
   border: 1px solid rgba(27, 31, 35, 0.15);
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
+}
+
+.login-button i {
+  font-size: 1.2rem;
 }
 
 .login-button:hover {
@@ -82,8 +108,9 @@ body {
 
 .user-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .user-info span {
