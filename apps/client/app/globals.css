@@ -1,33 +1,69 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
-  background-color: #f6f8fa;
+  background-color: #f0eef5;
   color: #24292e;
 }
+
+/* ── Layout ── */
 
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.dashboard-header {
+/* ── Parallax Hero ── */
+
+.dashboard-hero {
+  position: relative;
+  min-height: 280px;
+  background: linear-gradient(135deg, #1a0533 0%, #2d1b69 45%, #4D2FB2 100%);
+  background-attachment: fixed;
+  background-size: cover;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #d1d5da;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
 }
 
-.dashboard-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
 }
+
+.dashboard-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hero-subtitle {
+  margin: 0 0 24px 0;
+  font-size: 1.1rem;
+  color: #8b949e;
+  font-weight: 400;
+}
+
+/* Login button variant inside hero */
+.dashboard-hero .login-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.dashboard-hero .login-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-hero .user-info span {
+  color: #ffffff;
+}
+
+/* ── Buttons ── */
 
 .login-button {
   background-color: #24292e;
@@ -37,48 +73,87 @@ body {
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .login-button:hover {
   background-color: #40464d;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info span {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Main Content Area ── */
+
+
 .dashboard-main {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  background-color: #e8e4f0;
 }
 
 .filters-sidebar {
   width: 260px;
   padding: 24px;
-  background-color: #ffffff;
-  border-right: 1px solid #d1d5da;
+  background-color: #e8e4f0;
+  border-right: none;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
   overflow-y: auto;
 }
 
 .issues-content {
   flex: 1;
   padding: 24px;
-  overflow-y: auto;
 }
+
+/* ── Language Filter ── */
 
 .language-filter label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 1rem;
+  color: #2d1b69;
 }
 
 .language-filter select {
   width: 100%;
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #d1d5da;
-  background-color: #f6f8fa;
+  border: 1px solid #b0a2d1;
+  background-color: #eeebf5;
+  color: #2d1b69;
   font-size: 0.9rem;
 }
+
+.language-selected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #b0a2d1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.language-selected i {
+  font-size: 1.4rem;
+}
+
+/* ── Issue Grid ── */
 
 .issue-list {
   display: grid;
@@ -86,28 +161,35 @@ body {
   gap: 20px;
 }
 
+/* ── Issue Card (base) ── */
+
 .issue-card {
   background-color: #ffffff;
-  border: 1px solid #d1d5da;
+  border: 1px solid #c4b8e0;
+  border-left: 4px solid #d1d5da;
   border-radius: 6px;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(45, 27, 105, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .issue-card:hover {
-    box-shadow: 0 4px 12px rgba(27, 31, 35, 0.1);
+  box-shadow: 0 6px 16px rgba(45, 27, 105, 0.15);
+  transform: translateY(-2px);
 }
 
 .issue-card h3 {
   margin-top: 0;
   margin-bottom: 8px;
   font-size: 1.1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .issue-card h3 a {
-  color: #0366d6;
+  color: #4a2fa0;
   text-decoration: none;
   font-weight: 600;
 }
@@ -124,9 +206,11 @@ body {
   margin-bottom: 12px;
 }
 
+/* ── Issue Meta ── */
+
 .issue-meta {
   font-size: 0.8rem;
-  color: #586069;
+  color: #4a3d6b;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -138,19 +222,20 @@ body {
 }
 
 .issue-meta .issue-details-left {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
 .issue-meta span {
-    background-color: #f1f8ff;
-    padding: 2px 6px;
-    border-radius: 4px;
+  background-color: #eeebf5;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .issue-card .view-issue-link {
-  color: #0366d6;
+  color: #4a2fa0;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
@@ -158,4 +243,133 @@ body {
 
 .issue-card .view-issue-link:hover {
   text-decoration: underline;
+}
+
+/* ── Language Badge with Icon ── */
+
+.language-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.language-badge i {
+  font-size: 1rem;
+}
+
+/* ── Language Color-Coded Cards ── */
+
+.issue-card[data-language="javascript"] {
+  border-left-color: #f1e05a;
+  background-color: rgba(241, 224, 90, 0.06);
+}
+.issue-card[data-language="javascript"] .language-badge {
+  background-color: rgba(241, 224, 90, 0.2);
+  color: #735c0f;
+}
+
+.issue-card[data-language="python"] {
+  border-left-color: #3572A5;
+  background-color: rgba(53, 114, 165, 0.06);
+}
+.issue-card[data-language="python"] .language-badge {
+  background-color: rgba(53, 114, 165, 0.15);
+  color: #1a4971;
+}
+
+.issue-card[data-language="typescript"] {
+  border-left-color: #2b7489;
+  background-color: rgba(43, 116, 137, 0.06);
+}
+.issue-card[data-language="typescript"] .language-badge {
+  background-color: rgba(43, 116, 137, 0.15);
+  color: #1b4a57;
+}
+
+.issue-card[data-language="go"] {
+  border-left-color: #00ADD8;
+  background-color: rgba(0, 173, 216, 0.06);
+}
+.issue-card[data-language="go"] .language-badge {
+  background-color: rgba(0, 173, 216, 0.15);
+  color: #006d88;
+}
+
+.issue-card[data-language="java"] {
+  border-left-color: #b07219;
+  background-color: rgba(176, 114, 25, 0.06);
+}
+.issue-card[data-language="java"] .language-badge {
+  background-color: rgba(176, 114, 25, 0.15);
+  color: #6d4710;
+}
+
+.issue-card[data-language="c++"] {
+  border-left-color: #f34b7d;
+  background-color: rgba(243, 75, 125, 0.06);
+}
+.issue-card[data-language="c++"] .language-badge {
+  background-color: rgba(243, 75, 125, 0.15);
+  color: #9e1a42;
+}
+
+.issue-card[data-language="ruby"] {
+  border-left-color: #701516;
+  background-color: rgba(112, 21, 22, 0.06);
+}
+.issue-card[data-language="ruby"] .language-badge {
+  background-color: rgba(112, 21, 22, 0.15);
+  color: #701516;
+}
+
+.issue-card[data-language="rust"] {
+  border-left-color: #dea584;
+  background-color: rgba(222, 165, 132, 0.06);
+}
+.issue-card[data-language="rust"] .language-badge {
+  background-color: rgba(222, 165, 132, 0.2);
+  color: #8a5a36;
+}
+
+/* ── Mobile Responsive ── */
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    min-height: 200px;
+    padding: 32px 16px;
+    background-attachment: scroll;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .dashboard-main {
+    flex-direction: column;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid #d1d5da;
+    padding: 16px;
+  }
+
+  .issue-list {
+    grid-template-columns: 1fr;
+  }
+
+  .issues-content {
+    padding: 16px;
+  }
 }
