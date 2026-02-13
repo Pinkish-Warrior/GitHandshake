@@ -44,6 +44,17 @@ body {
   background-color: #40464d;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info span {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .dashboard-main {
   display: flex;
   flex: 1;
