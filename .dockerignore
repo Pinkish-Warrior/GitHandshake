@@ -1,39 +1,39 @@
 # Dependencies
-node_modules
+**/node_modules
 npm-debug.log
 
 # Build outputs
-dist
-build
-.next
+**/dist
+**/build
+**/.next
+**/.turbo
 
 # Environment files
-.env
-.env.local
-.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+**/*.bak
 
 # Git
 .git
 .gitignore
 
 # IDE
-.vscode
-.idea
-*.swp
-*.swo
+**/.vscode
+**/.idea
+**/*.swp
+**/*.swo
 
 # Logs
-*.log
-server.log
-client.log
+**/*.log
 
 # OS
-.DS_Store
+**/.DS_Store
 Thumbs.db
 
 # Testing
-coverage
-.nyc_output
+**/coverage
+**/.nyc_output
 
 # Documentation
 *.md

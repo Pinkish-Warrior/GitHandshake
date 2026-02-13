@@ -22,12 +22,15 @@ export class AuthController {
 
   @Get("github/callback")
   @UseGuards(AuthGuard("github"))
-  githubAuthCallback(@Res() res: Response) {
-    const clientUrl = this.configService.get<string>(
-      "CLIENT_URL",
-      "http://localhost:3000",
-    );
-    res.redirect(clientUrl);
+  async githubAuthCallback(@Req() req: Request, @Res() res: Response) {
+    // Explicitly call req.login to serialize user into session
+    await new Promise<void>((resolve, reject) => {
+      req.login(req.user!, (err) => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+    res.json({ status: "authenticated", user: req.user });
   }
 
   @Get("status")

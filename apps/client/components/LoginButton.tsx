@@ -45,7 +45,7 @@ const LoginButton = () => {
 
   return (
     <button className="login-button" onClick={handleLogin}>
-      Login with GitHub
+      <i className="devicon-github-original"></i> Login with GitHub
     </button>
   );
 };
