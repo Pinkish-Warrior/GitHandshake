@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 const LoginButton = () => {
   const [user, setUser] = useState<{ github_username: string } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/auth/status')
+    fetch(`${API_URL}/api/auth/status`, { credentials: 'include' })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'authenticated') {
@@ -18,11 +20,11 @@ const LoginButton = () => {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = '/api/auth/github';
+    window.location.href = `${API_URL}/api/auth/github`;
   };
 
   const handleLogout = () => {
-    fetch('/api/auth/logout')
+    fetch(`${API_URL}/api/auth/logout`, { credentials: 'include' })
       .then(() => {
         setUser(null);
         window.location.reload();

@@ -22,12 +22,20 @@ export class AuthController {
 
   @Get("github/callback")
   @UseGuards(AuthGuard("github"))
-  githubAuthCallback(@Res() res: Response) {
+  githubAuthCallback(@Req() req: Request, @Res() res: Response) {
     const clientUrl = this.configService.get<string>(
       "CLIENT_URL",
       "http://localhost:3000",
     );
-    res.redirect(clientUrl);
+    // Passport has set req.user, now we need to explicitly log in
+    // to ensure the session is created and the cookie is set
+    req.logIn(req.user!, (err) => {
+      if (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
+        return;
+      }
+      res.redirect(clientUrl);
+    });
   }
 
   @Get("status")
