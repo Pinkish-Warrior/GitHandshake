@@ -46,7 +46,7 @@ body {
   min-height: 280px;
   background-color: #1a0533;
   background-image: linear-gradient(135deg, rgba(26, 5, 51, 0.35) 0%, rgba(45, 27, 105, 0.25) 45%, rgba(77, 47, 178, 0.2) 100%),
-    url("/gitconnect.png");
+    url("/gitconnect-new.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -57,6 +57,11 @@ body {
   justify-content: flex-end;
   text-align: center;
   padding: 24px 24px 16px;
+}
+
+[data-theme="dark"] .dashboard-hero {
+  background-image: linear-gradient(135deg, rgba(26, 5, 51, 0.35) 0%, rgba(45, 27, 105, 0.25) 45%, rgba(77, 47, 178, 0.2) 100%),
+    url("/gitconnect.png");
 }
 
 .hero-overlay {
@@ -460,10 +465,8 @@ body {
 /* ── Sidebar Footer ── */
 
 .sidebar-footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  width: 308px;
   padding: 16px 24px;
   background-color: var(--bg-main);
   display: flex;
