@@ -11,7 +11,7 @@ echo "Servers stopped."
 
 echo ""
 echo "--- Stopping database container... ---"
-podman-compose down
+podman-compose down 2>&1 | grep -v "no container\|no such container"
 
 # Clean up log files
 rm -f server.log client.log
