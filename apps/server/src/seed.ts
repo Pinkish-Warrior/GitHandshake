@@ -22,19 +22,20 @@ async function bootstrap() {
     { owner: "nestjs", repo: "nest" },
     { owner: "microsoft", repo: "TypeScript" },
     // Python
-    { owner: "django", repo: "django" },
-    { owner: "pallets", repo: "flask" },
+    { owner: "pandas-dev", repo: "pandas" },
+    { owner: "scikit-learn", repo: "scikit-learn" },
     { owner: "fastapi", repo: "fastapi" },
     // Go
     { owner: "golang", repo: "go" },
     { owner: "kubernetes", repo: "kubernetes" },
     // Rust
-    { owner: "rust-lang", repo: "rust" },
+    { owner: "denoland", repo: "deno" },
+    { owner: "servo", repo: "servo" },
     // Java
-    { owner: "spring-projects", repo: "spring-boot" },
     { owner: "elastic", repo: "elasticsearch" },
     // Ruby
-    { owner: "rails", repo: "rails" },
+    { owner: "chatwoot", repo: "chatwoot" },
+    { owner: "forem", repo: "forem" },
     // C++
     { owner: "godotengine", repo: "godot" },
   ];

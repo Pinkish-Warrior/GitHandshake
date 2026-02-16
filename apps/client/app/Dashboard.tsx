@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import IssueList from '../components/IssueList';
 import LanguageFilter from '../components/LanguageFilter';
 import LoginButton from '../components/LoginButton';
+import ThemeToggle from '../components/ThemeToggle';
 import { Issue } from '../types';
 
 const Dashboard = () => {
@@ -42,7 +43,10 @@ const Dashboard = () => {
       <header className="dashboard-hero">
         <div className="hero-overlay">
           <h1>GitHandshake</h1>
-          <LoginButton />
+          <div className="hero-actions">
+            <LoginButton />
+            <ThemeToggle />
+          </div>
           <p className="hero-subtitle">Discover good first issues across open source</p>
         </div>
       </header>
@@ -52,6 +56,12 @@ const Dashboard = () => {
             selectedLanguage={selectedLanguage}
             onSelectLanguage={setSelectedLanguage}
           />
+          <div className="sidebar-footer">
+            <span>&copy; {new Date().getFullYear()} GitHandshake</span>
+            <a href="https://github.com/Pinkish-Warrior/GitHandshake" target="_blank" rel="noopener noreferrer">
+              <i className="devicon-github-original"></i> Pinkish-Warrior
+            </a>
+          </div>
         </aside>
         <main className="issues-content">
           {loading && <p>Loading issues...</p>}
@@ -64,6 +74,7 @@ const Dashboard = () => {
           )}
         </main>
       </div>
+
     </div>
   );
 };
