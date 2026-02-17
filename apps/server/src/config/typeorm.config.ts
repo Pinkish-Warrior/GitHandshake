@@ -17,6 +17,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       entities: [__dirname + "/../**/*.entity{.ts,.js}"],
       migrations: [__dirname + "/../migrations/*{.ts,.js}"],
       synchronize: this.configService.get<string>("NODE_ENV") !== "production",
+      ssl:
+        this.configService.get<string>("DB_SSL") === "true"
+          ? { rejectUnauthorized: false }
+          : false,
     };
   }
 }
