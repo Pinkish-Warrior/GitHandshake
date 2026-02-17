@@ -25,7 +25,7 @@ export class AuthController {
   async githubAuthCallback(@Req() req: Request, @Res() res: Response) {
     // Explicitly call req.login to serialize user into session
     await new Promise<void>((resolve, reject) => {
-      req.login(req.user!, (err) => {
+      req.login(req.user!, (err: Error) => {
         if (err) reject(err);
         else resolve();
       });
