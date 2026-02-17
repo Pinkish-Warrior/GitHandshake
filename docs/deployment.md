@@ -34,9 +34,9 @@ GitHandshake is a Turborepo monorepo deployed across three services:
 4. Extract the individual values for your env vars:
    - `DB_HOST` = `ep-xyz-123.us-east-2.aws.neon.tech`
    - `DB_PORT` = `5432`
-   - `DB_USERNAME` = from connection string
-   - `DB_PASSWORD` = from connection string
-   - `DB_DATABASE` = `neondb` (or rename it)
+   - `POSTGRES_USER` = from connection string
+   - `POSTGRES_PASSWORD` = from connection string
+   - `POSTGRES_DB` = `neondb` (or rename it)
 5. Run the schema against Neon using the SQL Editor in the Neon console, or via psql:
    ```bash
    psql "postgresql://user:password@ep-xyz-123.us-east-2.aws.neon.tech/neondb?sslmode=require" -f db/schema.sql
@@ -96,9 +96,9 @@ GitHandshake is a Turborepo monorepo deployed across three services:
 | `NODE_ENV` | `production` |
 | `DB_HOST` | Neon host (e.g., `ep-xyz-123.us-east-2.aws.neon.tech`) |
 | `DB_PORT` | `5432` |
-| `DB_USERNAME` | Neon username |
-| `DB_PASSWORD` | Neon password |
-| `DB_DATABASE` | Neon database name |
+| `POSTGRES_USER` | Neon username |
+| `POSTGRES_PASSWORD` | Neon password |
+| `POSTGRES_DB` | Neon database name |
 | `DB_SSL` | `true` |
 | `GITHUB_APP_ID` | Your GitHub App ID |
 | `GITHUB_CLIENT_ID` | Your GitHub OAuth Client ID |
