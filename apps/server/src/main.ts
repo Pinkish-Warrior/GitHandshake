@@ -58,7 +58,7 @@ async function bootstrap() {
     .addTag("health", "Service health check")
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup("api/docs", app, document);
+  SwaggerModule.setup("docs", app, document);
 
   const logger = new Logger("Bootstrap");
 
