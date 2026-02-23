@@ -19,3 +19,6 @@ dist/
 check-model.js
 debug-models.js
 gemini-test.js.env git add .ignore
+
+# Private working notes
+docs/note.md
