@@ -6,6 +6,7 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import * as session from "express-session";
 import * as passport from "passport";
 import helmet from "helmet";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -36,6 +37,18 @@ async function bootstrap() {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle("GitHandshake API")
+    .setDescription("API for discovering good first issues across open source repositories")
+    .setVersion("1.0")
+    .addTag("issues", "Browse and fetch good first issues")
+    .addTag("auth", "GitHub OAuth authentication")
+    .addTag("github", "GitHub App integration")
+    .addTag("health", "Service health check")
+    .build();
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup("api/docs", app, document);
 
   const logger = new Logger("Bootstrap");
 
