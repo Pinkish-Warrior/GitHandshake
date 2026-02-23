@@ -12,7 +12,12 @@ export async function GET(req: NextRequest) {
     },
   });
 
-  const response = NextResponse.redirect(new URL("/", req.url));
+  const proto = req.headers.get("x-forwarded-proto") || "http";
+  const host =
+    req.headers.get("x-forwarded-host") ||
+    req.headers.get("host") ||
+    "localhost:3000";
+  const response = NextResponse.redirect(`${proto}://${host}/`);
 
   // Forward the Set-Cookie header from the backend (now a 200 JSON response)
   const setCookie = res.headers.getSetCookie();
