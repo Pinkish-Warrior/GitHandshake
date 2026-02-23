@@ -12,7 +12,17 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "script-src": ["'self'", "'unsafe-inline'"],
+          "img-src": ["'self'", "data:", "https://validator.swagger.io"],
+        },
+      },
+    }),
+  );
   app.enableCors({
     origin: configService.get<string>("CLIENT_URL", "http://localhost:3000"),
     credentials: true,
