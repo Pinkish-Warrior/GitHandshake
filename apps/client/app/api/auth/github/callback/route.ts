@@ -6,12 +6,6 @@ export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const backendUrl = `${API_URL}/api/auth/github/callback${url.search}`;
 
-  const res = await fetch(backendUrl, {
-    headers: {
-      cookie: req.headers.get("cookie") || "",
-    },
-  });
-
   const proto = req.headers.get("x-forwarded-proto") || "http";
   const host =
     req.headers.get("x-forwarded-host") ||
@@ -19,10 +13,19 @@ export async function GET(req: NextRequest) {
     "localhost:3000";
   const response = NextResponse.redirect(`${proto}://${host}/`);
 
-  // Forward the Set-Cookie header from the backend (now a 200 JSON response)
-  const setCookie = res.headers.getSetCookie();
-  for (const cookie of setCookie) {
-    response.headers.append("set-cookie", cookie);
+  try {
+    const res = await fetch(backendUrl, {
+      headers: {
+        cookie: req.headers.get("cookie") || "",
+      },
+    });
+
+    const setCookie = res.headers.getSetCookie();
+    for (const cookie of setCookie) {
+      response.headers.append("set-cookie", cookie);
+    }
+  } catch {
+    // If server is unavailable, redirect home without a session
   }
 
   return response;
